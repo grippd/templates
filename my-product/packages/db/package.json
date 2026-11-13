@@ -1,0 +1,9 @@
+{
+  "name": "@my-product/db",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "migrate": "drizzle-kit migrate",
+    "generate": "drizzle-kit generate"
+  }
+}

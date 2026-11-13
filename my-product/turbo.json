@@ -1,0 +1,32 @@
+{
+  "$schema": "https://turborepo.com/schema.json",
+  "remoteCache": {
+    "signature": true
+  },
+  "tasks": {
+    "build": {
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": [
+        "dist/**",
+        ".svelte-kit/**"
+      ]
+    },
+    "check": {
+      "dependsOn": [
+        "^build"
+      ]
+    },
+    "lint": {},
+    "test": {
+      "dependsOn": [
+        "^build"
+      ]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    }
+  }
+}

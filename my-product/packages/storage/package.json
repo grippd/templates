@@ -1,0 +1,8 @@
+{
+  "name": "@my-product/storage",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@grippd/sdk": "^0.1.0"
+  }
+}
