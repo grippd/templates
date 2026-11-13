@@ -1,0 +1,20 @@
+{
+  "name": "@grippd/sdk",
+  "private": true,
+  "type": "module",
+  "description": "A stand-in for @grippd/sdk until it's on npm. Delete this folder and add the real package.",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "drizzle-orm": "^0.45.4",
+    "postgres": "^4.1.1"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20261113.1",
+    "typescript": "^6.0.3"
+  }
+}

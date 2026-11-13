@@ -1,0 +1,3 @@
+# The only infrastructure file in this repo: a static site anyone can open.
+name: docs-site
+public: true

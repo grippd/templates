@@ -1,0 +1,14 @@
+# The only infrastructure file in this repo. Three apps share one database and one
+# bucket; each gets its own keys. Everything else grippd works out from the code.
+name: saas-starter
+database: postgres
+files: true
+
+apps:
+  web:
+    domain: app.example.com   # yours: the team-only sign-in protects this hostname
+    access: team
+  worker:
+    cron: every hour
+  docs:
+    public: true

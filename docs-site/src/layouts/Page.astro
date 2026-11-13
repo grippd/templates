@@ -1,0 +1,36 @@
+---
+// Markdown pages pass their frontmatter; .astro pages can pass a title directly.
+interface Props {
+  title?: string;
+  frontmatter?: { title: string };
+}
+const title = Astro.props.frontmatter?.title ?? Astro.props.title ?? "";
+const pages = [
+  { href: "/", label: "Home" },
+  { href: "/getting-started/", label: "Getting started" },
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <nav>
+      {pages.map((p) => <a href={p.href} aria-current={Astro.url.pathname === p.href ? "page" : undefined}>{p.label}</a>)}
+    </nav>
+    <main>
+      <h1>{title}</h1>
+      <slot />
+    </main>
+  </body>
+</html>
+
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 42rem; margin: 2rem auto; padding: 0 1rem; line-height: 1.6; }
+  nav { display: flex; gap: 1rem; }
+  [aria-current="page"] { font-weight: 600; }
+</style>

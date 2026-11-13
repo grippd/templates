@@ -1,0 +1,6 @@
+# The only infrastructure file in this repo. With no apps: section, the whole repo is one
+# app named after the project, and its settings sit at the top.
+name: blog
+database: postgres
+files: true
+public: true

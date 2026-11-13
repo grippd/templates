@@ -1,0 +1,39 @@
+# Every template, on every pull request and push to main: its generated files match its
+# grippd.yaml, its README shows the current `grippd show`, and it installs, type-checks
+# and builds. Same as `bun run check` locally.
+name: Check templates
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+env:
+  # The grippd CLI release the templates are checked against. Bump it with the templates.
+  GRIPPD_VERSION: 0.1.0
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: jdx/mise-action@c2a87611a18de5b3828c5652fe268e992400cb5c # v4.3.0
+      - name: Install the grippd CLI
+        run: |
+          base="https://github.com/grippd/homebrew-tap/releases/download/cli-v${GRIPPD_VERSION}"
+          asset=grippd-x86_64-unknown-linux-musl.tar.gz
+          cd "$RUNNER_TEMP"
+          curl -fsSLO "$base/$asset"
+          curl -fsSLO "$base/SHA256SUMS"
+          grep " $asset\$" SHA256SUMS | sha256sum --check --strict
+          tar -xzf "$asset" grippd
+          install -m 0755 grippd /usr/local/bin/grippd
+          grippd --version
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ~/.bun/install/cache
+          key: bun-${{ runner.os }}-${{ hashFiles('*/bun.lock') }}
+          restore-keys: bun-${{ runner.os }}-
+      - run: bun scripts/check.ts

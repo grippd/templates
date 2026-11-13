@@ -1,0 +1,4 @@
+# The only infrastructure file in this repo: a Worker that runs on a schedule.
+# Its Durable Object is found in the code; it needs no line here.
+name: cron-worker
+cron: every 15 minutes
