@@ -18,6 +18,7 @@
         "^build"
       ]
     },
+    "lint": {},
     "dev": {
       "cache": false,
       "persistent": true
